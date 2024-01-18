@@ -4,6 +4,7 @@ import 'package:petugas_perpustakaan_app/app/data/constant/endpoint.dart';
 import 'package:petugas_perpustakaan_app/app/data/provider/api_provider.dart';
 import 'package:dio/dio.dart' as dio;
 import 'package:petugas_perpustakaan_app/app/data/provider/storage_provider.dart';
+import 'package:petugas_perpustakaan_app/app/modules/book/controllers/book_controller.dart';
 
 class AddBookController extends GetxController {
   //TODO: Implement AddBookController
@@ -12,6 +13,7 @@ class AddBookController extends GetxController {
   final TextEditingController penulisController = TextEditingController();
   final TextEditingController penerbitController = TextEditingController();
   final TextEditingController tahunController = TextEditingController();
+  final BookController _bookController= Get.find();
 
   final count = 0.obs;
   @override
@@ -49,6 +51,7 @@ class AddBookController extends GetxController {
             }
         );
         if (response.statusCode == 201) {
+          _bookController.getData();
           Get.back();
         } else {
           Get.snackbar("Sorry", "Login Gagal", backgroundColor: Colors.orange);
